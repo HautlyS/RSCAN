@@ -253,8 +253,45 @@ jobs:
         run: |
           cargo build --release --target aarch64-apple-ios --no-default-features \
             --features "bevy/bevy_asset,bevy/bevy_core_pipeline,bevy/bevy_pbr,bevy/bevy_render,bevy/bevy_winit,bevy/png,bevy/jpeg"
-          
-          # TODO: Create .ipa when signing is configured
+
+      - name: Create unsigned IPA
+        run: |
+          VERSION=$(grep '^version' Cargo.toml | head -1 | sed 's/.*"\(.*\)".*/\1/')
+          APP_DIR="Payload/TechnoSutra.app"
+          mkdir -p "$APP_DIR"
+          cp target/aarch64-apple-ios/release/techno_sutra "$APP_DIR/TechnoSutra"
+          cp -r assets "$APP_DIR/"
+          cat > "$APP_DIR/Info.plist" << 'EOF'
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+            <key>CFBundleExecutable</key><string>TechnoSutra</string>
+            <key>CFBundleIdentifier</key><string>com.technosutra.app</string>
+            <key>CFBundleName</key><string>Techno Sutra</string>
+            <key>CFBundleVersion</key><string>1</string>
+            <key>CFBundleShortVersionString</key><string>${VERSION}</string>
+            <key>MinimumOSVersion</key><string>13.0</string>
+            <key>CFBundlePackageType</key><string>APPL</string>
+            <key>LSRequiresIPhoneOS</key><true/>
+            <key>UIDeviceFamily</key><array><integer>1</integer><integer>2</integer></array>
+            <key>UIRequiredDeviceCapabilities</key><array><string>arm64</string></array>
+            <key>UISupportedInterfaceOrientations</key><array>
+              <string>UIInterfaceOrientationPortrait</string>
+              <string>UIInterfaceOrientationLandscapeLeft</string>
+              <string>UIInterfaceOrientationLandscapeRight</string>
+            </array>
+          </dict>
+          </plist>
+          EOF
+          cd Payload && zip -r ../techno-sutra-ios-unsigned-v${VERSION}.ipa TechnoSutra.app
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: techno-sutra-ios-ipa
+          path: techno-sutra-ios-*.ipa
+          retention-days: 7
+          if-no-files-found: error
 
   build-android:
     name: 🤖 Android
@@ -330,7 +367,7 @@ jobs:
 
   create-release:
     name: 📦 Release
-    needs: [build-linux, build-windows, build-macos, build-wasm]
+    needs: [build-linux, build-windows, build-macos, build-wasm, build-ios]
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -368,6 +405,7 @@ jobs:
           cp artifacts/techno-sutra-linux-tarball/*.tar.gz release/
           cp artifacts/techno-sutra-windows-zip/*.zip release/
           cp artifacts/techno-sutra-macos-zip/*.zip release/
+          cp artifacts/techno-sutra-ios-ipa/*.ipa release/
           cd artifacts/techno-sutra-web && zip -r ../../release/techno-sutra-web-${{ steps.v.outputs.version }}.zip .
           echo "📦 Release contents:"
           ls -la release/
@@ -389,6 +427,7 @@ jobs:
           | 🐧 Linux x64 | [techno-sutra-linux-x64-v${{ steps.v.outputs.version }}.tar.gz](https://github.com/${{ github.repository }}/releases/download/${{ steps.v.outputs.tag }}/techno-sutra-linux-x64-v${{ steps.v.outputs.version }}.tar.gz) |
           | 🪟 Windows x64 | [techno-sutra-windows-x64-v${{ steps.v.outputs.version }}.zip](https://github.com/${{ github.repository }}/releases/download/${{ steps.v.outputs.tag }}/techno-sutra-windows-x64-v${{ steps.v.outputs.version }}.zip) |
           | 🍎 macOS Universal | [techno-sutra-macos-universal-v${{ steps.v.outputs.version }}.zip](https://github.com/${{ github.repository }}/releases/download/${{ steps.v.outputs.tag }}/techno-sutra-macos-universal-v${{ steps.v.outputs.version }}.zip) |
+          | 📱 iOS (unsigned) | [techno-sutra-ios-unsigned-v${{ steps.v.outputs.version }}.ipa](https://github.com/${{ github.repository }}/releases/download/${{ steps.v.outputs.tag }}/techno-sutra-ios-unsigned-v${{ steps.v.outputs.version }}.ipa) |
           | 🌐 Web (self-host) | [techno-sutra-web-${{ steps.v.outputs.version }}.zip](https://github.com/${{ github.repository }}/releases/download/${{ steps.v.outputs.tag }}/techno-sutra-web-${{ steps.v.outputs.version }}.zip) |
           
           ## 🎮 Controls
