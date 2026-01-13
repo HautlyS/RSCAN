@@ -23,9 +23,12 @@ pub struct LoadResult {
 }
 
 #[tauri::command]
-pub async fn load_point_cloud(path: String, state: State<'_, AppState>) -> Result<LoadResult, String> {
+pub async fn load_point_cloud(
+    path: String,
+    state: State<'_, AppState>,
+) -> Result<LoadResult, String> {
     let cloud = PointCloud::from_ply(std::path::Path::new(&path))?;
-    
+
     let bounds = if cloud.points.is_empty() {
         [[0.0; 3], [0.0; 3]]
     } else {
@@ -39,13 +42,13 @@ pub async fn load_point_cloud(path: String, state: State<'_, AppState>) -> Resul
         }
         [min, max]
     };
-    
+
     let result = LoadResult {
         point_count: cloud.points.len(),
         has_colors: !cloud.colors.is_empty(),
         bounds,
     };
-    
+
     *state.cloud.lock().unwrap() = Some(cloud);
     Ok(result)
 }
@@ -59,33 +62,36 @@ pub struct ProcessOptions {
 }
 
 #[tauri::command]
-pub async fn process_point_cloud(options: ProcessOptions, state: State<'_, AppState>) -> Result<usize, String> {
+pub async fn process_point_cloud(
+    options: ProcessOptions,
+    state: State<'_, AppState>,
+) -> Result<usize, String> {
     let mut cloud_guard = state.cloud.lock().unwrap();
     let cloud = cloud_guard.as_mut().ok_or("No point cloud loaded")?;
-    
+
     {
         let mut status = state.status.lock().unwrap();
         status.stage = "Processing".into();
         status.progress = 0.0;
     }
-    
+
     if let Some(voxel_size) = options.voxel_size {
         cloud.voxel_downsample(voxel_size);
     }
-    
+
     if options.remove_outliers {
         let k = options.outlier_k.unwrap_or(20);
         let std = options.outlier_std.unwrap_or(2.0);
         cloud.remove_outliers(k, std);
     }
-    
+
     {
         let mut status = state.status.lock().unwrap();
         status.stage = "Complete".into();
         status.progress = 1.0;
         status.point_count = cloud.points.len();
     }
-    
+
     Ok(cloud.points.len())
 }
 

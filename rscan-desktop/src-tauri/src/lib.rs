@@ -1,5 +1,5 @@
-mod point_cloud;
 mod commands;
+mod point_cloud;
 
 use commands::AppState;
 use std::sync::Mutex;

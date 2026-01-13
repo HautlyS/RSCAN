@@ -1,0 +1,9 @@
+/home/hautly/RSCAN/rscan-desktop/src-tauri/target/debug/deps/dtoa-6a6b621535497e66.d: /home/hautly/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dtoa-1.0.11/src/lib.rs /home/hautly/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dtoa-1.0.11/src/diyfp.rs /home/hautly/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dtoa-1.0.11/src/dtoa.rs
+
+/home/hautly/RSCAN/rscan-desktop/src-tauri/target/debug/deps/libdtoa-6a6b621535497e66.rlib: /home/hautly/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dtoa-1.0.11/src/lib.rs /home/hautly/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dtoa-1.0.11/src/diyfp.rs /home/hautly/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dtoa-1.0.11/src/dtoa.rs
+
+/home/hautly/RSCAN/rscan-desktop/src-tauri/target/debug/deps/libdtoa-6a6b621535497e66.rmeta: /home/hautly/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dtoa-1.0.11/src/lib.rs /home/hautly/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dtoa-1.0.11/src/diyfp.rs /home/hautly/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dtoa-1.0.11/src/dtoa.rs
+
+/home/hautly/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dtoa-1.0.11/src/lib.rs:
+/home/hautly/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dtoa-1.0.11/src/diyfp.rs:
+/home/hautly/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dtoa-1.0.11/src/dtoa.rs:

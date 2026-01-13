@@ -1,0 +1,10 @@
+/home/hautly/RSCAN/rscan-desktop/src-tauri/target/debug/deps/tauri_plugin_dialog-d5d7794e0c8c1c60.d: /home/hautly/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-plugin-dialog-2.5.0/src/lib.rs /home/hautly/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-plugin-dialog-2.5.0/src/desktop.rs /home/hautly/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-plugin-dialog-2.5.0/src/commands.rs /home/hautly/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-plugin-dialog-2.5.0/src/error.rs /home/hautly/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-plugin-dialog-2.5.0/src/models.rs /home/hautly/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-plugin-dialog-2.5.0/src/init-iife.js
+
+/home/hautly/RSCAN/rscan-desktop/src-tauri/target/debug/deps/libtauri_plugin_dialog-d5d7794e0c8c1c60.rmeta: /home/hautly/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-plugin-dialog-2.5.0/src/lib.rs /home/hautly/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-plugin-dialog-2.5.0/src/desktop.rs /home/hautly/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-plugin-dialog-2.5.0/src/commands.rs /home/hautly/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-plugin-dialog-2.5.0/src/error.rs /home/hautly/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-plugin-dialog-2.5.0/src/models.rs /home/hautly/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-plugin-dialog-2.5.0/src/init-iife.js
+
+/home/hautly/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-plugin-dialog-2.5.0/src/lib.rs:
+/home/hautly/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-plugin-dialog-2.5.0/src/desktop.rs:
+/home/hautly/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-plugin-dialog-2.5.0/src/commands.rs:
+/home/hautly/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-plugin-dialog-2.5.0/src/error.rs:
+/home/hautly/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-plugin-dialog-2.5.0/src/models.rs:
+/home/hautly/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-plugin-dialog-2.5.0/src/init-iife.js:
